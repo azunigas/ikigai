@@ -1,0 +1,186 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.navbar {
+    background: linear-gradient(180deg, rgba(75,43,177,1) 0%, rgba(82,55,214,1) 100%);
+}
+
+.brand img {
+    width: 35px;
+}
+
+.brand:hover {
+    transform: rotate(90deg);
+    transition: transform 0.5s;
+}
+
+.jumbotron {
+    background: linear-gradient(180deg, rgba(75,43,177,1) 0%, rgba(122,143,242,1) 100%);
+    margin-bottom:0
+}
+
+.section {
+    padding: 53px 30px 15px 30px;
+}
+
+.texto{
+    font-family: 'Quicksand', sans-serif;
+    font-size: 17px;
+}
+
+.title{
+    font-family: 'Oswald', sans-serif;
+    color: #686868;
+}
+
+/*nosotros*/
+.slide img {
+    width: 100%;
+}
+/*-----------------------------------------------------*/
+
+/*servicios*/
+.icon-service i{
+    color: cornflowerblue;
+    font-size: 30px;
+}
+
+#servicios h4{
+    font-family: 'Quicksand', sans-serif;
+    font-size: 2.5vmin;
+    color: #002752;
+}
+
+#servicios p{
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.3vmax;
+}
+/*-----------------------------------------------------*/
+
+
+/*valores*/
+.modalBtn {
+    color: cornflowerblue;
+}
+
+.modalBtn:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+.panel {
+    margin-top: 20px;
+    border-radius: 10px;
+    -webkit-transition: .5s;
+    transition: .5s;
+}
+
+.panel:hover{
+    -webkit-transform: scale(1.02);
+    transform: scale(1.02);
+}
+
+.panel-heading {
+    padding: 25px;
+    color: white;
+    background: linear-gradient(180deg, rgba(98,51,172,1) 24%, rgba(126,96,255,1) 100%);
+    -webkit-transform: skewY(-0.7deg) scale(1);
+    transform: skewY(-0.7deg) scale(1);
+}
+
+.panel-heading h5 {
+    font-family: 'Righteous', cursive;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.panel-heading i {
+    padding-top: 15px;
+    font-size: 40px;
+    color: #fff;
+}
+
+.panel-body {
+    padding-top: 10px;
+}
+
+.valor {
+    color: #D0A90B;
+    font-size: 25px;
+    font-family: 'Kanit', sans-serif;
+}
+
+.horario {
+    font-family: 'Kanit', sans-serif;
+    font-size: 17px;
+}
+
+.inf {
+    font-family: 'Kanit', sans-serif;
+    font-size: 13px;
+}
+/*-----------------------------------------------------*/
+
+
+/*footer*/
+.footer{
+    background-color: #1d2124;
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.footer-copyright{
+    background-color: #1b1e21;
+}
+
+.fa-angle-up{
+    font-size: 25px;
+    color: white;
+}
+
+.social i{
+    color: steelblue;
+    font-size: 17px;
+}
+
+/*Animation*/
+.slideanim {
+    visibility: hidden;
+}
+
+.slide {
+    /* The name of the animation */
+    animation-name: slide;
+    -webkit-animation-name: slide;
+    /* The duration of the animation */
+    animation-duration: 2.5s;
+    -webkit-animation-duration: 2.5s;
+    /* Make the element visible */
+    visibility: visible;
+}
+
+/* porcentaje de opacidad */
+@keyframes slide {
+    0% {
+        opacity: 0;
+        transform: translateY(15%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}
+
+@-webkit-keyframes slide {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(15%);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0%);
+    }
+}

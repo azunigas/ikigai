@@ -1,0 +1,477 @@
+{% extends 'ikigai/base.html' %}
+
+{% block content %}
+    {% load static %}
+    <div class="jumbotron jumbotron-fluid text-center">
+        <img src="{% static 'images/logoikigai.svg' %}" alt="logo">
+    </div>
+    <!--Nosotros-->
+    <div class="section shadow-lg" id="nosotros">
+        <div class="row">
+
+            <div class="col-12 col-md-6">
+                <h2 class="title">Nosotros</h2>
+                <p class="texto text-justify">Somos Centro Ikigai, un espacio creado para todos aquellos terapeutas complementarios o profesionales
+                    que necesiten un lugar para atender a sus pacientes. Nuestro equipo ha creado este centro,
+                    ocupándose de cada uno de sus detalles para lograr un espacio armónico, moderno y muy bien equipado,
+                    en donde puedas atender a tus pacientes con el más alto estándar de calidad.</p>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="slide carousel-fade shadow slideanim" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{% static 'images/slide/couching1.jpg' %}" alt="slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'images/slide/couching2.jpg' %}" alt="slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'images/slide/reiki1.jpg' %}" alt="slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'images/slide/reiki2.jpg' %}" alt="slide">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--/Nosotros-->
+
+    <!--Servicios-->
+    <div class="text-center section icon-service" id="servicios">
+        <h2 class="title">Servicios</h2>
+        <p class="texto">Te invitamos a ser parte de nuestro mundo Ikigai. Imposible no enamorarte de cada uno de los detalles que
+            tenemos disponible para ti.</p>
+
+        <div class="row justify-content-center">
+
+            <div class="col-6 col-md-4 p-3 slideanim">
+                <i class="fas fa-couch"></i>
+                <h4>EQUIPAMIENTO</h4>
+                <p>Mobiliario nuevo y de vanguardia</p>
+            </div>
+
+            <div class="col-6 col-md-4 p-3 slideanim">
+                <i class="fas fa-building icon-service"></i>
+                <h4>INFRAESTRUCTURA</h4>
+                <p>Instalaciones modernas</p>
+            </div>
+
+            <div class="col-6 col-md-4 p-3 slideanim">
+                <i class="fas fa-mobile-alt"></i>
+                <h4>ACCESIBILIDAD</h4>
+                <p>Facilidad para reservar tu box desde celulares o pc</p>
+            </div>
+
+            <div class="col-6 col-md-4 p-3 slideanim">
+                <i class="fab fa-pagelines"></i>
+                <h4>AMBIENTE</h4>
+                <p>Creado para entrar en un ambiente totalmente armónico de paz y buenas energías</p>
+            </div>
+
+            <div class="col-6 col-md-4 p-3 slideanim">
+                <i class="fas fa-door-open"></i>
+                <h4>ACCESO</h4>
+                <p>Acceso personalizado mediante clave en cerradura digital, lo que te permite una mayor
+                    independencia</p>
+            </div>
+
+            <div class="col-6 col-md-4 p-3 slideanim">
+                <i class="fas fa-people-carry"></i>
+                <h4>ADAPTABILIDAD</h4>
+                <p>Disponibilidad de implementos para profesionalizar tu atención, como balanza, camillas, pizarra,
+                    cafeteras, nos adaptamos a tus necesidades</p>
+            </div>
+
+            <div class="col-6 col-md-4 p-3 slideanim">
+                <i class="fas fa-hand-holding-usd"></i>
+                <h4>VALORES</h4>
+                <p>Valores de mercado</p>
+            </div>
+
+            <div class="col-6 col-md-4 p-3 slideanim">
+                <i class="fas fa-hand-holding-heart"></i>
+                <h4>PROMOCIONES</h4>
+                <p>Acceso a promociones y mas beneficios para terapeutas socios</p>
+            </div>
+
+            <div class="col-6 col-md-4 p-3 slideanim">
+                <i class="fas fa-wifi"></i>
+                <h4>WI-FI</h4>
+                <p>Wifi disponible y gratis</p>
+            </div>
+
+        </div>
+    </div>
+    <!--/Servicios-->
+
+    <!--Box-->
+    <div class="text-center section shadow-lg" id="box">
+        <h2 class="title">Nuestros Box</h2>
+        <div class="row justify-content-center">
+            {% if box %}
+                {% for bx in box %}
+
+                    <div class="card m-3 slideanim shadow border-0" style="width: 23rem;">
+                        <img src="{{ bx.imagen.url }}" class="card-img-top" alt="Box">
+                        <div class="card-body">
+                            <h5 class="title">{{ bx.nombrebox }}</h5>
+                            <p class="card-text">{{ bx.contenido }}</p>
+                        </div>
+                        <div class="card-body border-top ">
+                            <p class="card-text">{{ bx.proposito }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="stretched-link">Ver Disponibilidad</a>
+                        </div>
+                    </div>
+
+                {% endfor %}
+            {% else %}
+                <p >Agregar Box</p><i class="far fa-grin-beam-sweat"></i>
+            {% endif %}
+        </div>
+    </div>
+    <!--/Box-->
+
+    <!--valores-->
+    <div id="valores" class="text-center bg-grey section">
+
+        <h2 class="title">Valores</h2>
+        <h4 class="texto"><strong class="modalBtn" data-toggle="modal" data-target="#modal">Terminos y Condiciones</strong>, Lea detenidamente estas condiciones antes de acceder
+            a usar los servicios.</h4>
+
+        <div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <!-- Modal content -->
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="row m-3">
+                        <div class="col-12">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="col-sm-3">
+                            <img class="" src="{% static 'images/logoIkigai.png' %}" alt="logo" style="width: 100px;">
+                        </div>
+                        <div class="col-sm-6 p-4">
+                            <h5 class="modal-title">TERMINOS Y CONDICIONES</h5>
+                        </div>
+
+                    </div>
+
+
+                    <div class="modal-body text-left border-top border-warning">
+
+                        <p>Las presentes condiciones de uso (“Condiciones”) regulan el acceso on uso que usted haga, como
+                            persona, desde cualquier país del mundo, de aplicaciones, web, contenidos, productos y servicios
+                            (“los servicios”) puesto a disposición por CENTRO IKIGAI, una sociedad de responsabilidad
+                            limitada constituida en Chile, con domicilio social DR. Barros Borgoño 160, oficina 603,
+                            Providencia, Santiago, representada legalmente para estos efectos por doña Romina Rivas
+                            Mardones.</p>
+
+                        <p>LEA ESTAS CONDICIONES DETENIDAMENTE ANTES DE ACCEDER A USAR LOS SERVICIOS</p>
+                        <p>Mediante su acceso y uso de los servicios usted acuerda vincularse jurídicamente por estas
+                            condiciones, que establecen una relación contractual entre usted (arrendatario) y los
+                            arrendadores (“arrendador”), también clientes de CENTRO IKIGAI. Si usted no acepta estas
+                            condiciones, non podrá acceder a usar los servicios. Éstas condiciones sustituyen expresamente
+                            los acuerdos o compromisos previos con usted. CENTRO IKIGAI podrá poner fin de inmediato a éstas
+                            condiciones o cualquiera de los servicios respecto de usted o, en general, dejar de ofrecer o
+                            denegar el acceso a los servicios o cualquier parte de ellos, en cualquier momento y por
+                            cualquier motivo.</p>
+
+                        <p>Se podrán aplicar condiciones suplementarias a determinados servicios, como políticas para un
+                            evento, una actividad o una promoción particular, y dichas condiciones suplementarias
+                            prevalecerán sobre las condiciones en el caso de conflicto con respecto a los servicios
+                            aplicables. Las condiciones suplementarias prevalecerán sobre las Condiciones en el caso de
+                            conflicto con respecto a los Servicios aplicables.</p>
+
+                        <p>CENTRO IKIGAI podrá modificar las Condiciones relativas a los Servicios cuando lo considere
+                            oportuno. Las modificaciones serán efectivas después de la publicación por parte de CENTRO
+                            IKIGAI de dichas Condiciones actualizadas en esta ubicación o las políticas modificadas o
+                            condiciones suplementarias sobre el Servicio aplicable. Su acceso o uso continuado de los
+                            Servicios después de dicha publicación constituye su consentimiento a vincularse por las
+                            Condiciones y sus modificaciones.</p>
+
+                        <p>La recopilación y el uso que hacemos de la información personal en relación con los Servicios es
+                            conforme se dispone en la Política de privacidad de CENTRO IKIGAI, la cual establece:</p>
+
+                        <p>1. Evaluación y verificación de la educación, intereses, experiencias y otras calificaciones de
+                            interés del cliente en conjunto con la satisfacción por el uso de la aplicación y el trabajo
+                            conjunto con CENTRO IKIGAI.</p>
+                        <p>2. Comunicación en relación a tu experiencia e informar al cliente respecto a sus oportunidades y
+                            expectativas profesionales.</p>
+                        <p>3. Creación y puesta a disposición de los informes que requiera la legislación vigente.</p>
+                        <p>4. Para mejorar nuestro proceso interno de funcionamiento en base a la información
+                            proporcionada.</p>
+
+                        <p>DE LOS SERVICIOS:</p>
+
+                        <p>1. Respecto de la reserva de horas en línea. La reserva deberá ser realizada por el profesional,
+                            que la solicita directamente en la plataforma electrónica definida para tales efectos.</p>
+                        <p>Las horas se pueden cancelar y modificar hasta 6 horas antes de la hora tomada, en cuyo caso el
+                            profesional deberá eliminar o modificar la hora directamente en la plataforma de reserva en
+                            línea, en caso contrario el horario se considerará utilizado y será cobrado.</p>
+                        <p>2. Respecto del uso de las oficinas. Las oficinas podrán serán utilizadas exclusivamente para el
+                            uso que se ha definido en cada caso y durante en el horario reservado por sistema para tales
+                            efectos.</p>
+                        <p>Está estrictamente prohibido fumar en cualquiera de las instalaciones de la oficina, es decir:
+                            privados (box), baños, recepción o cafetería.</p>
+                        <p>En caso de utilizar loza u otros utensilios deberán ser lavadas y quedar disponible en las mismas
+                            condiciones en las que fue encontrada.</p>
+                        <p>3. Respecto del cumplimiento del horario. El profesional se obliga a utilizar la oficina
+                            estrictamente en el horario contratado y debidamente reservado a través de la plataforma
+                            electrónica definida para tales efectos, respetando el horario de salida.</p>
+                        <p>En caso de que no haya otra reserva en el siguiente horario y requiera extender su atención podrá
+                            reservar en el momento mediante la aplicación y cancelando en el momento.</p>
+                        <p>4. Respecto de los materiales guardados en la oficina. No se aceptará que se almacenen objetos de
+                            valor o equipos computacionales ni tecnológicos. CENTRO IKIGAI Ltda. no se hará responsable por
+                            la pérdida o hurto de los bienes dejados en esta zona.</p>
+                        <p>5. Respecto al uso de la llave. En caso de que el arrendatario le haga entrega de una llave para
+                            acceder a las oficinas, dicha llave será de carácter personal e intransferible, en caso de no
+                            continuar arrendando, el arrendatario se obliga a dejar la llave en un sobre cerrado al interior
+                            de la oficina indicando su nombre al exterior de dicho sobre.</p>
+                        <p>En caso de que al interior de la oficina no se encuentren más profesionales o clientes al momento
+                            de salir deberá dejar la oficina cerrada con llave con las luces apagadas.</p>
+                        <p>Adicional a los profesionales que estén de manera permanente tendrán clave digital de acceso
+                            personalizada, la cual registrará hora y usuario.</p>
+                        <p>6. Cláusula de pago del servicio. El arrendatario deberá contratar en primera instancia el
+                            servicio ya sea básico, plus o full por un período de un mes, pudiendo renovarse por períodos
+                            IGUALES y consecutivos, si ninguna de las partes manifiesta su voluntad de ponerle término, si
+                            fuese así deberá avisar 15 días antes de que no renovará el servicio sino tendrá que pagar mes
+                            correspondiente.</p>
+                        <p>El cliente pagará el valor, que incluye los impuestos aplicables por ley, que será inmediatamente
+                            facturado y le permitirá hacer uso de los servicios.</p>
+                        <p>A través del saldo en su bolsa de minutos al cliente se le descontará el servicio según las horas
+                            de arriendo que haya reservado.</p>
+                        <p>las bolsas compradas, así como los cargos pagados por usted son definitivos y no reembolsables, a
+                            menos que CENTRO IKIGAI determine lo contrario.</p>
+                        <p>CENTRO IKIGAI, en cualquier momento y a su sola discreción, se reserva el derecho de establecer,
+                            eliminar y/o revisar los Cargos para alguno o todos los servicios o bienes obtenidos a través
+                            del uso de los Servicios.</p>
+                        <p>El cliente se compromete a mantener la información en su Cuenta de forma exacta, completa y
+                            actualizada. Si no mantiene la información de Cuenta de forma exacta, completa y actualizada,
+                            incluso el tener un método de pago inválido o que haya vencido, podrá resultar en su
+                            imposibilidad para acceder y utilizar los Servicios o en la resolución por parte de CENTRO
+                            IKIGAI de este Contrato celebrado con usted. El cliente es responsable de toda la actividad que
+                            ocurre en su Cuenta y se compromete a mantener en todo momento de forma segura y secreta el
+                            nombre de usuario y la contraseña de su Cuenta.</p>
+
+                        <p>7. CUMPLIMIENTO DE REGLAS INTERNAS:</p>
+
+                        <p>El arrendatario debe cumplir con todas las reglas internas que el Arrendador en general disponga
+                            a los usuarios. Estas reglas son desarrolladas por el Arrendador con el objeto de proteger el
+                            derecho del Cliente de utilizar la oficina arrendada dentro del horario determinado y proteger
+                            el derecho respecto del horario de los Clientes que hayan arrendado la oficina en un horario
+                            inmediatamente posterior.</p>
+                        <p>CENTRO IKIGAI podrá facilitar al órgano o ente gubernamental competente o a una aseguradora
+                            cualquier información necesaria (incluida su información de contacto) si hubiera quejas,
+                            disputas o conflictos, que pudieran significar un mal uso o daño de las instalaciones o el no
+                            cumplimiento de alguno de los requisitos siguientes:</p>
+
+                        <p>8. TERMINACIÓN INMEDIATA DE ESTE CONTRATO:</p>
+
+                        <p>CENTRO IKIGAI puede poner término en forma inmediata a este contrato, sin seguir ningún proceso
+                            adicional y dilatorio, notificando al Arrendatario si éste incurre en las siguientes
+                            conductas:</p>
+                        <p>a. Si no cumple con el horario establecido de uso de la oficina perjudicando a los otros
+                            Arrendatarios.</p>
+                        <p>b. Si no cumple con lo dispuesto en cuanto al uso de la bodega y en cuanto al horario de uso de
+                            estacionamiento.</p>
+                        <p>c. Si concurre a utilizar la oficina en un horario que no corresponde al plan contratado.</p>
+                        <p>d. Si utiliza la oficina contratada para otros fines ilícitos o para cualquier actividad ilegal,
+                            de acuerdo a lo establecido por la legislación vigente y que no tengan nada que ver con la
+                            actividad para la cual fue contratado el espacio. (Se reserva el derecho de informar o denunciar
+                            a Carabineros de Chile o Policía de Investigaciones)</p>
+                        <p>e. Si el Arrendatario fuma en la oficina en general, baños, recepción o cafetería.</p>
+                        <p>f. Si el Arrendatario daña las instalaciones, muebles o la propiedad en general.</p>
+                        <p>g. Si el Arrendatario no cumple con dejar limpia la oficina una vez que la ha utilizado.</p>
+                        <p>h. Si su conducta o la conducta de alguna persona, con su autorización o invitación, no
+                            corresponde o no es acorde con el uso corriente de la Oficina o bien, si la conducta provoca
+                            daño en la oficina, que será determinado por el Arrendador.</p>
+                        <p>i. El Arrendatario no podrá realizar actividades que compitan directamente con el negocio del
+                            CENTRO IKIGAI, ni podrá subarrendar oficinas.</p>
+                        <p>j. El Arrendador no responderá en manera alguna frente al Arrendatario por robos que puedan
+                            ocurrir en la oficina arrendada, o por los perjuicios que puedan producirse por incendio,
+                            inundaciones, filtraciones, roturas de cañerías, efectos de humedad o calor, actos terroristas,
+                            maliciosos o producto de desórdenes.</p>
+                        <p>El no cumplimiento de cualquiera de las condiciones listadas anteriormente significará que CENTRO
+                            IKIGAI&nbsp; tendrá derecho revocar inmediatamente el arriendo y bloquear la posibilidad de
+                            arrendar en el futuro.</p>
+
+                        <p>9. TITULARIDAD.</p>
+
+                        <p>Los Servicios y todos los derechos relativos a estos son y permanecerán en propiedad de CENTRO
+                            IKIGAI. Ninguna de estas Condiciones ni su uso de los Servicios le transfieren u otorgan ningún
+                            derecho al usurario de las instalaciones de CENTRO IKIGAI: (i) sobre o en relación con los
+                            Servicios; o bien (ii) a utilizar o mencionar en cualquier modo a los nombres de empresa,
+                            logotipos, nombres de producto y servicio, marcas comerciales o marcas de servicio de CENTRO
+                            IKIGAI.</p>
+
+                        <p>10. ACCESO A LA RED Y DISPOSITIVOS.</p>
+
+                        <p>Usted es responsable de obtener el acceso a la red de datos necesario para utilizar los
+                            Servicios. Podrán aplicarse las tarifas y tasas de datos y mensajes de su red móvil si usted
+                            accede o utiliza los Servicios desde un dispositivo inalámbrico y usted será responsable de
+                            dichas tarifas y tasas. Usted es responsable de adquirir y actualizar el hardware compatible o
+                            los dispositivos necesarios para acceder y utilizar los Servicios y Aplicaciones y cualquier
+                            actualización de estos. CENTRO IKIGAI no garantiza que los Servicios, o cualquier parte de
+                            estos, funcionen en cualquier hardware o dispositivo particular. Además, los Servicios podrán
+                            ser objeto de disfunciones o retrasos inherentes al uso de Internet y de las comunicaciones
+                            electrónicas.</p>
+
+                        <p>11. DOMICILIO y JURISDICCIÓN</p>
+
+                        <p>Para todos los efectos derivados de este contrato, las partes fijan su domicilio en la comuna de
+                            Providencia y se someten a la jurisdicción de los Tribunales de Justicia de la ciudad de
+                            Santiago.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="panel shadow slideanim">
+
+                    <div class="panel-heading">
+                        <h5>PRECIOS DE ARRIENDO POR HORA:</h5>
+                        <div class="title">
+                            <i class="far fa-clock"></i>
+                        </div>
+                    </div>
+
+                    <div class="panel-body pb-2">
+                        <p class="horario">Mañana: (8am - 2pm)</p>
+                        <p class="inf">Desde</p>
+                        <p class="valor">$5.400</p>
+                        <p class="horario">Tarde: (2pm - 9 pm)</p>
+                        <p class="inf">Desde</p>
+                        <p class="valor">$6.000</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="panel shadow slideanim">
+
+                    <div class="panel-heading">
+                        <h5>PRECIOS DE ARRIENDO POR PAQUETE: AM</h5>
+                        <div class="title">
+                            <i class="far fa-calendar-alt"></i>
+                        </div>
+                    </div>
+
+                    <div class="panel-body pb-2">
+                        <p class="horario">10 hrs. AM</p>
+                        <p class="inf">(Ahorro $10.800)</p>
+                        <p class="valor">$43.200</p>
+                        <p class="horario">20 hrs. AM</p>
+                        <p class="inf">(Ahorro $32.400)</p>
+                        <p class="valor">$75.200</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="panel shadow slideanim">
+
+                    <div class="panel-heading">
+                        <h5>PRECIOS DE ARRIENDO POR PAQUETE: PM</h5>
+                        <div class="title">
+                            <i class="far fa-calendar-alt"></i>
+                        </div>
+                    </div>
+
+                    <div class="panel-body pb-2">
+                        <p class="horario">10 hrs. PM</p>
+                        <p class="inf">(Ahorro $12.000)</p>
+                        <p class="valor">$48.000</p>
+                        <p class="horario">20 hrs. PM</p>
+                        <p class="inf">(Ahorro $36.000)</p>
+                        <p class="valor">$84.000</p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-12">
+                <p style="padding-top: 10px">* Valores IVA incluído.</p>
+            </div>
+        </div>
+
+    </div>
+    <!--/Valores-->
+
+    <!--Ubicacion-->
+    <div id="ubicacion" class="text-center section shadow-lg">
+        <h2 class="title">¿Dónde Estamos?</h2>
+        <p class="texto">Metro Manuel Montt, Doctor Barros Borgoño 160, oficina 603, Providencia, Santiago.</p>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1663.2062999421416!2d-70.618376!3d-33.430189000000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662cf7cd3e8af49%3A0x8a9d99ba969a4c42!2sDr%20Manuel%20Barros%20Borgo%C3%B1o%20160%2C%20Providencia%2C%20Regi%C3%B3n%20Metropolitana!5e0!3m2!1ses-419!2scl!4v1570487192978!5m2!1ses-419!2scl"
+                height="400" frameborder="0" style="border:0; width: 100%"></iframe>
+    </div>
+    <!--Ubicacion-->
+
+    <!--Contacto-->
+    <div id="contacto" class="section">
+        <h2 class="text-center title">Contacto</h2>
+        <br>
+        <div class="row">
+
+            <div class="col-md-6">
+                <p class="texto">Si desea más información sobre reservas, servicios o funcionamiento de nuestro sistema de reservas,
+                    escríbanos o llámenos y responderemos sus consultas rápidamente.</p>
+                <p><i class="fas fa-phone-square"></i>+56 2 3248 3019</p>
+                <p><i class="fas fa-mobile-alt"></i>+56 9 6142 0889</p>
+                <p><i class="fas fa-at"></i>contacto@centroikigai.cl</p>
+            </div>
+
+            <form class="col-md-6" action="{% url 'ikigai:consulta' %}" method="post" id="question_form">
+                {% csrf_token %}
+                <div class="slideanim">
+                    <div class="form-row">
+
+                        <div class="col-sm-6 col-md-12 col-lg-6 mb-3">
+                            <input class="form-control" id="nombre" name="nombre" placeholder="Nombre" type="text"
+                                   maxlength="50">
+                            <div class="alert p-1 mb-0 alert-warning collapse" id="valnombre"></div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-12 col-lg-6 mb-3">
+                            <input type="email" class="form-control" id="correo" name="correo"
+                                   placeholder="Correo Electronico" maxlength="50">
+                            <div class="alert p-1 mb-0 alert-warning collapse" id="valcorreo"></div>
+                        </div>
+                    </div>
+
+                    <textarea class="form-control" id="mensaje" name="mensaje" placeholder="Mensaje"
+                              rows="4" maxlength="170"></textarea>
+
+                    <div class="alert p-1 mb-0 alert-warning collapse" id="valmensaje"></div>
+
+                    <div class="row pt-3">
+                        <div class=" col-2 mb-3">
+                            <button class="btn btn-primary" type="submit">Enviar</button>
+                        </div>
+                        <div class="col-10">
+                            <div class="alert ml-3 p-1 mb-0 alert-success fade" role="alert" id="msjEnviado">
+                                Mensaje enviado correctamente
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--Fin Contacto-->
+{% endblock %}

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">-->
+
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Kanit|Oswald|Quicksand|Righteous&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    <link rel=icon href={% static 'images/icono.png' %} sizes="any" type="image/svg+xml">
+    <title>Ikigai</title>
+
+</head>
+<body id="nosotros" data-spy="scroll" data-target=".menu" data-offset="60">
+<!--Menu-->
+<nav class="navbar navbar-expand-md navbar-dark sticky-top">
+    <a class="brand mr-2" href="#ikigai"><img src="{% static 'images/icono.png' %}" alt="logo"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse menu" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#nosotros">Nosotros</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#servicios">Servicios</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#box">Box</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#valores">Valores</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#contacto">Contacto</a>
+            </li>
+        </ul>
+        {% if user.is_authenticated %}
+            <form class="form-inline">
+                <a class="btn btn-sm btn-outline-info mr-2" href="{% url 'profile' %}">Perfil</a>
+                <a class="btn btn-sm btn-outline-info" href="{% url 'logout' %}">Cerrar Sesion</a>
+            </form>
+        {% else %}
+            <form class="form-inline">
+                <a class="btn btn-sm btn-outline-info" href="{% url 'login' %}">Iniciar Sesion</a>
+            </form>
+        {% endif %}
+    </div>
+</nav>
+<!--/Menu-->
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% block content %}
+
+{% endblock %}
+
+<!--Footer-->
+<footer class="footer text-center">
+    <div class="pt-3">
+        <a href="#nosotros">
+            <i class="fas fa-angle-up "></i>
+        </a>
+    </div>
+    <ul class="pt-3 social">
+        <li class="list-inline-item">
+            <p>Siguenos en</p>
+        </li>
+        <li class="list-inline-item">
+            <a href="https://www.facebook.com/Centro-Ikigai-263378267525965/?ref=settings" class="btn-floating btn-fb mx-1">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </li>
+        <li class="list-inline-item">
+            <a href="https://www.instagram.com/centroikigai/" class="btn-floating btn-dribbble mx-1">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </li>
+    </ul>
+    <div class="footer-copyright p-3">Todos los derechos reservados | Centro Ikigai 2018
+    </div>
+</footer>
+<!--/Footer-->
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<!--
+<script src="{% static 'js/jquery-3.3.1.slim.min.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+-->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+
+
+<!--Activa animacion al scrollear-->
+<script>
+    $(window).scroll(function() {
+        $(".slideanim").each(function() {
+            var pos = $(this).offset().top;
+
+            var winTop = $(window).scrollTop();
+            if (pos < winTop + 600) {
+                $(this).addClass("slide");
+            }
+        });
+    });
+</script>
+
+<!--validacion del formulario-->
+<script type="text/javascript">
+    let form = document.querySelector('#question_form');
+    $(document).on('submit', '#question_form', function (e) {
+        e.preventDefault();
+        let idnombre = document.getElementById("valnombre");
+        let idcorreo = document.getElementById("valcorreo");
+        let idmensaje = document.getElementById("valmensaje");
+        let idmsjenviado = document.getElementById("msjEnviado");
+        $(idnombre).hide();
+        $(idcorreo).hide();
+        $(idmensaje).hide();
+        $(idmsjenviado).hide();
+        let nombre, correo, mensaje, regex;
+        nombre = document.getElementById('nombre').value;
+        correo = document.getElementById('correo').value;
+        mensaje = document.getElementById('mensaje').value;
+        regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z]{2,4})+$/;
+        if (nombre === "") {
+            $(idnombre).text('Debe Ingresar su nombre');
+            $(idnombre).show();
+            return false;
+        } else if (regex.test(correo) === false) {
+            $(idcorreo).text('Correo no valido');
+            $(idcorreo).show();
+            return false;
+        } else if (mensaje === "") {
+            $(idmensaje).text('Debe Ingresar comentario');
+            $(idmensaje).show();
+            return false;
+        } else if (regex.test(correo)) {
+            $.ajax({
+                type: 'POST',
+                url: 'consulta/',
+                data: {
+                    nombre: $('#nombre').val(),
+                    correo: $('#correo').val(),
+                    mensaje: $('#mensaje').val(),
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                },
+                success: function () {
+                    idmsjenviado.classList.add("show");
+                    $(idmsjenviado).show().fadeTo(5000, 0).slideUp(500, function () {
+                        $(idmsjenviado).slideUp(500);
+                        idmsjenviado.style.opacity = "1";
+                    });
+                }
+            });
+            form.reset();
+            return true;
+        }
+    });
+</script>
+
+<!--Smooth scroll-->
+<script>
+    $(document).ready(function() {
+        // Add smooth scrolling to all links in navbar + footer link
+        $(".navbar a, .footer a[href='#nosotros']").on('click', function(event) {
+            // Make sure this.hash has a value before overriding default behavior
+            if (this.hash !== "") {
+                // Prevent default anchor click behavior
+                event.preventDefault();
+
+                // Store hash
+                let hash = this.hash;
+
+                // Using jQuery's animate() method to add smooth page scroll
+                // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top
+                }, 900, function() {
+
+                    // Add hash (#) to URL when done scrolling (default click behavior)
+                    window.location.hash = hash;
+                });
+            } // End if
+        });
+    });
+</script>
+
+</body>
+</html>
