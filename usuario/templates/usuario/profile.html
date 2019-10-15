@@ -3,18 +3,18 @@
 {% block content %}
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-10 col-md-6 col-lg-4 content-section">
+            <div class="col-10 col-md-6 col-lg-4 content-section shadow">
                 <div class="media">
                     <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" alt="">
                     <div class="media-body">
                         <h2 class="">{{ user.username }}</h2>
-                        <p class="text-secondary">{{ user.email }}</p>
+                        <p class="text-secondary user-mail" style="font-size: 2.5vmin">{{ user.email }}</p>
                     </div>
                 </div>
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <fieldset class="form-group">
-                        <legend class="border-bottom mb-4">Perfil de Usuario</legend>
+                        <legend class="border-bottom mb-4 register">Perfil de Usuario</legend>
                         {{ u_form|crispy }}
                         {{ p_form|crispy }}
                     </fieldset>
@@ -25,4 +25,5 @@
             </div>
         </div>
     </div>
+
 {% endblock %}

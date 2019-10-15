@@ -6,12 +6,15 @@ from PIL import Image
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='default.png', upload_to='profile.pics')
+    rut = models.CharField(max_length=9)
+    celular = models.CharField(max_length=11)
+    especialidad = models.CharField(max_length=30)
 
     def __str__(self):
-        return f'{self.user.username} Profile'
+        return self.user.username
 
-    def save(self):
-        super().save()
+    def save(self, *args, **kwargs):
+        super(Profile, self).save(*args, **kwargs)
 
         img = Image.open(self.image.path)
 

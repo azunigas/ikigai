@@ -1,20 +1,27 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import RegistroUsuario, UserUpdateForm, ProfileUpdateForm
+from .forms import RegistroUsuario, UserUpdateForm, ProfileUpdateForm, RegisterProfile
 from django.contrib.auth.decorators import login_required
+from .models import Profile
 
 
 def register(request):
     if request.method == 'POST':
         form = RegistroUsuario(request.POST)
-        if form.is_valid():
-            form.save()
+        profile_form = RegisterProfile(request.POST)
+        if form.is_valid() and profile_form.is_valid():
+            user = form.save()
+            user_profile = profile_form.save(commit=False)
+            user_profile.user = user
+            user_profile.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'Registro realizado correctamente! Ahora puede iniciar sesion {username}!')
             return redirect('login')
     else:
         form = RegistroUsuario()
-    return render(request, 'usuario/register.html', {'form': form})
+        profile_form = RegisterProfile()
+    return render(request, 'usuario/register.html', {'form': form,
+                                                     'profile_form': profile_form})
 
 
 @login_required

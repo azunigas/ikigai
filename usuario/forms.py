@@ -5,13 +5,20 @@ from .models import Profile
 
 
 class RegistroUsuario(UserCreationForm):
-    esp = forms.CharField(max_length=50)
-    cel = forms.IntegerField()
-    rut = forms.CharField(max_length=9)
+    email = forms.EmailField(required=True)
+    first_name = forms.CharField(max_length=30)
+    last_name = forms.CharField(max_length=30)
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'rut', 'cel', 'esp', 'username', 'password1', 'password2']
+        fields = ['username', 'password1', 'password2', 'first_name', 'last_name', 'email']
+
+
+class RegisterProfile(forms.ModelForm):
+
+    class Meta:
+        model = Profile
+        fields = ['rut', 'celular', 'especialidad']
 
 
 class UserUpdateForm(forms.ModelForm):
@@ -24,4 +31,4 @@ class UserUpdateForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['image']
+        fields = ['celular', 'image']

@@ -4,6 +4,13 @@
     box-sizing: border-box;
 }
 
+.profile-alert{
+    position: fixed;
+    top: 60px;
+    left:2%;
+    width: 96%;
+}
+
 .navbar {
     background: linear-gradient(180deg, rgba(75,43,177,1) 0%, rgba(82,55,214,1) 100%);
 }
