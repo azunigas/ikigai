@@ -1,0 +1,32 @@
+{% extends 'ikigai/base.html' %}
+{% block content %}
+    <h5>Reservas</h5>
+    <!--Box-->
+    <div class="text-center section shadow-lg" id="box">
+        <h2 class="title">Nuestros Box</h2>
+        <div class="row justify-content-center">
+            {% if box %}
+                {% for bx in box %}
+
+                    <div class="card m-3 shadow border-0" style="width: 23rem;">
+                        <img src="{{ bx.imagen.url }}" class="card-img-top" alt="Box">
+                        <div class="card-body">
+                            <h5 class="title">{{ bx.nombrebox }}</h5>
+                            <p class="card-text">{{ bx.contenido }}</p>
+                        </div>
+                        <div class="card-body border-top ">
+                            <p class="card-text">{{ bx.proposito }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="stretched-link">Ver Disponibilidad</a>
+                        </div>
+                    </div>
+
+                {% endfor %}
+            {% else %}
+                <p >Agregar Box</p><i class="far fa-grin-beam-sweat"></i>
+            {% endif %}
+        </div>
+    </div>
+    <!--/Box-->
+{% endblock %}

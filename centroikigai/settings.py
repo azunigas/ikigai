@@ -32,8 +32,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'crispy_forms',
+    'reserva.apps.ReservaConfig',
     'usuario.apps.UsuarioConfig',
-    'agenda.apps.AgendaConfig',
     'ikigai.apps.IkigaiConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -132,5 +132,5 @@ MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = 'ikigai:index'
+LOGIN_REDIRECT_URL = 'reserva'
 LOGIN_URL = 'login'

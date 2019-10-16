@@ -109,26 +109,29 @@
     <!--/Servicios-->
 
     <!--Box-->
-    <div class="text-center section shadow-lg" id="box">
-        <h2 class="title">Nuestros Box</h2>
+    <div class="section shadow-lg" id="box">
+        <h2 class="title text-center">Nuestros Box</h2>
         <div class="row justify-content-center">
             {% if box %}
-                {% for bx in box %}
-
-                    <div class="card m-3 slideanim shadow border-0" style="width: 23rem;">
-                        <img src="{{ bx.imagen.url }}" class="card-img-top" alt="Box">
-                        <div class="card-body">
-                            <h5 class="title">{{ bx.nombrebox }}</h5>
-                            <p class="card-text">{{ bx.contenido }}</p>
-                        </div>
-                        <div class="card-body border-top ">
-                            <p class="card-text">{{ bx.proposito }}</p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="#" class="stretched-link">Ver Disponibilidad</a>
+                {% for b in box %}
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                        <div class="box_grid shadow">
+                            <figure class="block-reveal">
+                                <a href="#"><img src="{{ b.imagen.url }}" class="img-fluid" alt=""></a>
+                                <div class="price">Agata</div>
+                            </figure>
+                            <div class="wrapper">
+                                <h3>{{ b.nombrebox }}</h3>
+                                <small>Equipamiento</small>
+                                <p>{{ b.contenido }}</p>
+                                <small>Espacial para:</small>
+                                <p>{{ b.proposito }}</p>
+                            </div>
+                            <ul>
+                                <li><a href="#">Reservar Ahora</a></li>
+                            </ul>
                         </div>
                     </div>
-
                 {% endfor %}
             {% else %}
                 <p >Agregar Box</p><i class="far fa-grin-beam-sweat"></i>
