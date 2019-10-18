@@ -117,7 +117,7 @@
                     <div class="col-sm-6 col-md-4 col-lg-3">
                         <div class="box_grid shadow">
                             <figure class="block-reveal">
-                                <a href="#"><img src="{{ b.imagen.url }}" class="img-fluid" alt=""></a>
+                                <img src="{{ b.imagen.url }}" class="img-fluid" alt="">
                                 <div class="price">Agata</div>
                             </figure>
                             <div class="wrapper">
@@ -128,7 +128,9 @@
                                 <p>{{ b.proposito }}</p>
                             </div>
                             <ul>
-                                <li><a href="#">Reservar Ahora</a></li>
+                                <li>
+                                    <div class="btn-reserva" >Reservar Ahora</div>
+                                </li>
                             </ul>
                         </div>
                     </div>

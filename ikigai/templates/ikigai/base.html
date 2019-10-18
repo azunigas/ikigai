@@ -23,59 +23,43 @@
 </head>
 <body id="nosotros" data-spy="scroll" data-target=".menu" data-offset="60">
 <!--Menu-->
-{% if user.is_authenticated %}
-    <nav class="navbar navbar-expand-md navbar-dark sticky-top">
-        <a class="brand mr-2" href="#nosotros"><img src="{% static 'images/icono.png' %}" alt="logo"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse menu" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'ikigai:index' %}">Nosotros</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'reserva' %}">Reservas</a>
-                </li>
-            </ul>
-            <form class="form-inline">
+<nav class="navbar navbar-expand-md navbar-dark sticky-top">
+    <a class="brand mr-2" href="#nosotros"><img src="{% static 'images/icono.png' %}" alt="logo"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse menu" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#nosotros">Nosotros</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#servicios">Servicios</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#box">Box</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#valores">Valores</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#contacto">Contacto</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link reserva" href="{% url 'reserva' %}">Reservas</a>
+            </li>
+        </ul>
+        <form class="form-inline">
+            {% if user.is_authenticated %}
                 <a class="btn btn-sm btn-outline-light mr-2" href="{% url 'profile' %}">Perfil</a>
                 <a class="btn btn-sm btn-outline-light" href="{% url 'logout' %}">Cerrar Sesion</a>
-            </form>
-        </div>
-    </nav>
-{% else %}
-    <nav class="navbar navbar-expand-md navbar-dark sticky-top">
-        <a class="brand mr-2" href="#nosotros"><img src="{% static 'images/icono.png' %}" alt="logo"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse menu" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#nosotros">Nosotros</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#servicios">Servicios</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#box">Box</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#valores">Valores</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#contacto">Contacto</a>
-                </li>
-            </ul>
-            <form class="form-inline">
+            {% else %}
                 <a class="btn btn-sm btn-outline-light" href="{% url 'login' %}">Iniciar Sesion</a>
-            </form>
-        </div>
-    </nav>
-{% endif %}
+            {% endif %}
+        </form>
+    </div>
+</nav>
 <!--/Menu-->
 
 {% if messages %}

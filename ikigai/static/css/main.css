@@ -52,7 +52,6 @@
 .slide img {
     width: 100%;
 }
-
 /*-----------------------------------------------------*/
 
 /*servicios*/
@@ -161,6 +160,7 @@
     color: steelblue;
     font-size: 17px;
 }
+/*-----------------------------------------------------*/
 
 /*Animation*/
 .slideanim {
@@ -200,16 +200,35 @@
         -webkit-transform: translateY(0%);
     }
 }
+/*-----------------------------------------------------*/
 
+/*Box*/
 .box_grid {
     background-color: #fff;
     display: block;
     position: relative;
     margin-bottom: 30px;
+    border-radius: 5px;
 }
 
+.btn-reserva{
+    background: linear-gradient(90deg, rgba(27,67,187,1) 0%, rgba(42,158,227,1) 100%);
+    color: white;
+    padding: 9px 20px;
+    font-weight: 500;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    cursor: pointer;
+}
 
-
+.btn-reserva:hover{
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 
 .box_grid figure {
     margin-bottom: 0;
@@ -217,7 +236,7 @@
     position: relative;
 }
 
-.box_grid figure a img {
+.box_grid figure img {
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
     -ms-transform: scale(1);
@@ -228,7 +247,7 @@
     backface-visibility: hidden;
 }
 
-.box_grid figure a:hover img {
+.box_grid figure:hover img {
     -webkit-transform: scale(1.1);
     -moz-transform: scale(1.1);
     -ms-transform: scale(1.1);
@@ -281,21 +300,4 @@
     display: inline-block;
     margin-right: 15px;
 }
-
-.box_grid ul li:last-child a {
-    background: #fff;
-    border: 2px solid #662d91;
-    color: #662d91;
-    padding: 5px 20px;
-    font-weight: 500;
-    line-height: 1;
-    -moz-transition: all .3s ease-in-out;
-    -o-transition: all .3s ease-in-out;
-    -webkit-transition: all .3s ease-in-out;
-    -ms-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out;
-    -webkit-border-radius: 30px;
-    -moz-border-radius: 30px;
-    -ms-border-radius: 30px;
-    border-radius: 30px;
-}
+/*-----------------------------------------------------*/
