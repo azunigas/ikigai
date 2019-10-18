@@ -17,14 +17,14 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
           integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-    <link rel=icon href={% static 'images/icono.png' %} sizes="any" type="image/svg+xml">
+    <link rel=icon href={% static 'images/icono2.png' %} sizes="any" type="image/svg+xml">
     <title>Ikigai</title>
 
 </head>
-<body id="nosotros" data-spy="scroll" data-target=".menu" data-offset="60">
+<body id="reserva" data-spy="scroll" data-target=".menu" data-offset="60">
 <!--Menu-->
 <nav class="navbar navbar-expand-md navbar-dark sticky-top">
-    <a class="brand mr-2" href="{% url 'ikigai:index' %}"><img src="{% static 'images/icono.png' %}" alt="logo"></a>
+    <a class="brand mr-2" href="#reserva"><img src="{% static 'images/icono.png' %}" alt="logo"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -48,12 +48,20 @@
         </form>
     </div>
 </nav>
-
 <!--/Menu-->
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="profile-alert alert alert-{{ message.tags }}" style="font-size: 2.5vmin;">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
 {% block content %}
 
     <!--Box-->
-    <div class="section shadow-lg" id="reserva">
+    <div class="section shadow-lg" id="box">
         <h2 class="title text-center">Reservas</h2>
         <div class="row justify-content-center">
             {% if box %}
@@ -87,4 +95,84 @@
     <!--/Box-->
 
 {% endblock %}
+
 </body>
+<!--Footer-->
+<footer class="footer text-center">
+    <div class="pt-3">
+        <a href="#reserva">
+            <i class="fas fa-angle-up "></i>
+        </a>
+    </div>
+    <ul class="pt-3 social">
+        <li class="list-inline-item">
+            <p>Siguenos en</p>
+        </li>
+        <li class="list-inline-item">
+            <a href="https://www.facebook.com/Centro-Ikigai-263378267525965/?ref=settings" class="btn-floating btn-fb mx-1">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </li>
+        <li class="list-inline-item">
+            <a href="https://www.instagram.com/centroikigai/" class="btn-floating btn-dribbble mx-1">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </li>
+    </ul>
+    <div class="footer-copyright p-3">Todos los derechos reservados | Centro Ikigai 2018
+    </div>
+</footer>
+<!--/Footer-->
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<!--
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<!--
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+-->
+
+<script src="{% static 'js/jquery-3.3.1.slim.min.js' %}"></script>
+<!--<script src="{% static 'js/popper.min.js' %}"></script>-->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+
+<!--Smooth scroll-->
+<script>
+    $(document).ready(function() {
+        // Add smooth scrolling to all links in navbar + footer link
+        $(".navbar a, .footer a[href='#reserva']").on('click', function(event) {
+            // Make sure this.hash has a value before overriding default behavior
+            if (this.hash !== "") {
+                // Prevent default anchor click behavior
+                event.preventDefault();
+
+                // Store hash
+                let hash = this.hash;
+
+                // Using jQuery's animate() method to add smooth page scroll
+                // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top
+                }, 900, function() {
+
+                    // Add hash (#) to URL when done scrolling (default click behavior)
+                    window.location.hash = hash;
+                });
+            } // End if
+        });
+    });
+</script>
+
+<!--Oculta mensajes de alerta-->
+<script>
+    $(document).ready(function() {
+        $(".alert-success").fadeTo(7000, 0).slideUp(500, function(){
+            $(".alert-success").slideUp(500);
+        });
+    });
+</script>
