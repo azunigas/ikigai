@@ -14,7 +14,7 @@ class Reserva(models.Model):
 
 
 class Horario(models.Model):
-    idHorario = models.AutoField(primary_key=True)
+    idhorario = models.AutoField(primary_key=True)
     horario = models.CharField(max_length=2)
     valor = models.IntegerField()
 
@@ -22,7 +22,7 @@ class Horario(models.Model):
 class Hora(models.Model):
     idHora = models.AutoField(primary_key=True)
     hora = models.CharField(max_length=13)
-    idHorario = models.ForeignKey(Horario, on_delete=models.SET_NULL, null=True)
+    idhorario = models.ForeignKey(Horario, on_delete=models.SET_NULL, null=True)
 
 
 class HorasReserva(models.Model):
