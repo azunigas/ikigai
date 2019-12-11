@@ -24,6 +24,9 @@ class Hora(models.Model):
     hora = models.CharField(max_length=13)
     idhorario = models.ForeignKey(Horario, on_delete=models.SET_NULL, null=True)
 
+    def __str__(self):
+        return self.hora
+
 
 class HorasReserva(models.Model):
     idReserva = models.ForeignKey(Reserva, on_delete=models.CASCADE)

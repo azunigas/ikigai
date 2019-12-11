@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
     'crispy_forms',
     'reserva.apps.ReservaConfig',
     'usuario.apps.UsuarioConfig',
