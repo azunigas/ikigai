@@ -20,6 +20,8 @@
     <link rel=icon href={% static 'images/icono2.png' %} sizes="any" type="image/svg+xml">
     <title>Ikigai</title>
 
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
 </head>
 
 <body id="reserva" data-spy="scroll" data-target=".menu" data-offset="60">
@@ -101,33 +103,100 @@
                             <div class="modal-body">
                                 <div class="container-fluid bd-example-row">
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-12">
+                                            <div class="container">
+                                                <div class="row justify-content-center">
+                                                    <div class="col-12 col-lg-6 mb-4">
+                                                        <div class="calendar-container">
+                                                            <div class="calendar">
+                                                                <div class="year-header">
+                                                                    <span class="left-button" id="prev"> &lang; </span>
+                                                                    <span class="year" id="label"></span>
+                                                                    <span class="right-button" id="next"> &rang; </span>
+                                                                </div>
 
+                                                                <table class="months-table">
+                                                                    <tbody>
+                                                                    <tr class="months-row">
+                                                                        <td class="month">Ene</td>
+                                                                        <td class="month">Feb</td>
+                                                                        <td class="month">Mar</td>
+                                                                        <td class="month">Abr</td>
+                                                                        <td class="month">May</td>
+                                                                        <td class="month">Jun</td>
+                                                                        <td class="month">Jul</td>
+                                                                        <td class="month">Ago</td>
+                                                                        <td class="month">Sep</td>
+                                                                        <td class="month">Oct</td>
+                                                                        <td class="month">Nov</td>
+                                                                        <td class="month">Dic</td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+
+                                                                <table class="days-table">
+                                                                    <td class="day">Dom</td>
+                                                                    <td class="day">Lun</td>
+                                                                    <td class="day">Mar</td>
+                                                                    <td class="day">Mie</td>
+                                                                    <td class="day">Jue</td>
+                                                                    <td class="day">Vie</td>
+                                                                    <td class="day">Sab</td>
+                                                                </table>
+
+                                                                <div class="frame">
+                                                                    <table class="dates-table">
+                                                                        <tbody class="tbody">
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+
+                                                                <button class="button" id="add-button">Add Event</button>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 col-lg-6">
+                                                        <div class="events-container">
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="dialog" id="dialog">
+
+                                                    <h2 class="dialog-header"> Add New Event </h2>
+
+                                                    <form class="form" id="form">
+
+                                                        <div class="form-container">
+                                                            <label class="form-label" id="valueFromMyButton" for="name">Event name</label>
+                                                            <input class="input" type="text" id="name" maxlength="36">
+                                                            <label class="form-label" id="valueFromMyButton" for="count">Number of people to invite</label>
+                                                            <input class="input" type="number" id="count" min="0" max="1000000" maxlength="7">
+                                                            <input type="button" value="Cancel" class="button" id="cancel-button">
+                                                            <input type="button" value="OK" class="button" id="ok-button">
+                                                        </div>
+
+                                                    </form>
+
+                                                </div>
+
+                                            </div>
+                                            <!-- Dialog Box-->
                                         </div>
-                                        <div class="col-md-4 ml-auto">.col-md-4 .ml-auto</div>
+
                                     </div>
+
                                     <div class="row">
-                                        <div class="col-md-3 ml-auto">.col-md-3 .ml-auto</div>
-                                        <div class="col-md-2 ml-auto">.col-md-2 .ml-auto</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 ml-auto">
+                                        <div class="col-12">
                                             <div class="horas" id="{{ b.id }}"></div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-sm-9">
-                                            Level 1: .col-sm-9
-                                            <div class="row">
-                                                <div class="col-8 col-sm-6">
-                                                    Level 2: .col-8 .col-sm-6
-                                                </div>
-                                                <div class="col-4 col-sm-6">
-                                                    Level 2: .col-4 .col-sm-6
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -181,6 +250,13 @@
 <!--
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+</script>
+
+<script src="{% static 'js/calendar.js' %}"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
