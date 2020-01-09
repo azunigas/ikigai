@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.views import generic
 from ikigai.models import Box
-from .models import Hora
+from .models import Hora, HorasReservadas
 from rest_framework import viewsets
-from .serializers import HoraSerializers
+from .serializers import HoraSerializers, ReservaSerializers
 
 
 class ReservaView(generic.ListView):
@@ -17,3 +17,8 @@ class ReservaView(generic.ListView):
 class HoraView(viewsets.ModelViewSet):
     queryset = Hora.objects.all()
     serializer_class = HoraSerializers
+
+
+class ReservaHoraView(viewsets.ModelViewSet):
+    queryset = HorasReservadas.objects.all()
+    serializer_class = ReservaSerializers
