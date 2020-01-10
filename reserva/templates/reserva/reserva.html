@@ -95,7 +95,8 @@
 
                 <!--Modal-->
                 <div id="{{ box.nombrebox }}" class="modal fade" tabindex="-1" role="dialog"
-                     aria-labelledby="gridModalLabel" style="display: none;" aria-hidden="true">
+                     aria-labelledby="gridModalLabel" style="display: none;" aria-hidden="true" data-backdrop="static"
+                     data-keyboard="false">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -104,27 +105,17 @@
                             <div class="modal-body">
                                 <div class="container-fluid bd-example-row">
                                     <div class="row">
-                                        <div class="col-12 calendar" id="{{ box.id }}">
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="horas" id="{{ box.id }}"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="horas" id="{{ box.id }}"></div>
+                                        <div class="col-12 calendar" id="{{ box.id }}"><!--calendario--> </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary btn-canReserva" data-dismiss="modal" id="{{ box.id }}">Cancelar</button>
-                                <button type="button" class="btn btn-primary btn-conReserva" id="{{ box.id }}">Reservar</button>
+                                <button type="button" class="btn btn-secondary btn-canReserva" data-dismiss="modal"
+                                        id="{{ box.id }}">Cancelar
+                                </button>
+                                <button type="button" class="btn btn-primary btn-conReserva" id="{{ box.id }}">
+                                    Reservar
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -237,8 +228,8 @@
 
     for (let btnReservar of btnReserva) {
         btnReservar.onclick = function () {
-            for(let i of calendar){
-                if(i.id === btnReservar.id){
+            for (let i of calendar) {
+                if (i.id === btnReservar.id) {
                     i.innerHTML = `<div class="container">
                                     <div class="row justify-content-center">
                                     <div class="col-12 col-md-6 mb-4">
@@ -246,10 +237,9 @@
                                     <div class="calendar">
                                     <div class="year-header">
                                     <span class="left-button" id="prev"> &lang; </span>
-                                    <span class="months" id="month"></span>
+                                    <span id="date"></span>
                                     <span class="right-button" id="next"> &rang; </span>
                                     </div>
-
                                     <table class="days-table">
                                     <thead>
                                     <td class="day-name">Lu</td>
@@ -261,49 +251,51 @@
                                     <td class="day-name">Do</td>
                                     </thead>
                                     <tbody class="month-table">
-
                                     </tbody>
                                     </table>
-
                                     </div>
                                     </div>
                                     </div>
-
                                     <div class="col-12 col-md-6">
                                     <div class="events-container">
-
+                                    <div class="events"></div>
+                                    <div id="horas" class="row">
+                                    <div id="am" class="col-6"></div>
+                                    <div id="pm" class="col-6"></div>
                                     </div>
                                     </div>
-
+                                    </div>
                                     </div>
                                     </div>
                                     `;
 
-
                     // Setup the calendar with the current date
                     let date = new Date();
-                    $(document).ready(function(){
+                    $(document).ready(function () {
                         let today = date.getDate();
                         // Set click handlers for DOM elements
                         $('.left-button').click({date: date}, prev_month);
                         $('.right-button').click({date: date}, next_month);
                         init_calendar(date);
-                        var events = check_events(today, date.getMonth()+1, date.getFullYear());
+                        let events = check_events(today, date.getMonth() + 1, date.getFullYear());
                     });
 
                     // Initialize the calendar by appending the HTML dates
+                    let today = date.getDate(); // obtine numero del dia del mes
+                    let thisMonth = date.getMonth();
+                    let thisYear = date.getFullYear();
+
                     function init_calendar() {
-                        var calendar_days = $(".month-table");// Asocia la tabla de fechas a la variable calendar_days
+                        let calendar_days = $(".month-table");// Asocia la tabla de fechas a la variable calendar_days
                         calendar_days.empty(); // Vacía los dias del calendario
-                        var month = date.getMonth(); // obtiene numero de mes. enero = 0
-                        var year = date.getFullYear(); // Obtiene el año yyyy
-                        var day_count = days_in_month(month, year); // Obtiene cantidad de dias del mes
-                        var today = date.getDate(); // obtine numero del dia del mes
+                        let month = date.getMonth(); // obtiene numero de mes. enero = 0
+                        let year = date.getFullYear(); // Obtiene el año yyyy
+                        let day_count = days_in_month(month, year); // Obtiene cantidad de dias del mes
                         // Set date to 1 to find the first day of the month
                         date.setDate(1); // Setea variable date con el prier dia del mes
-                        var first_day = date.getDay(); // Obtiene el dia (D,L,M,M,J,V,S) del primer die del mes
-
-                        switch(first_day){
+                        let first_day = date.getDay(); // Obtiene el dia (D,L,M,M,J,V,S) del primer die del mes
+                        let firstDay = 0;
+                        switch (first_day) {
                             case 0:
                                 firstDay = 7;
                                 break;
@@ -328,72 +320,71 @@
                         }
                         // 35+firstDay is the number of date elements to be added to the dates table
                         // 35 is from (7 days in a week) * (up to 5 rows of dates in a month)
-                        for(i=0, e=1; i<day_count+firstDay-1; i++,e++) {
+                        for (i = 0, e = 1; i < day_count + firstDay - 1; i++, e++) {
                             // Since some of the elements will be blank,
                             // need to calculate actual date from index
-                            var day = e-firstDay+1;
+                            let day = e - firstDay + 1;
                             // If it is a sunday, make a new row
-                            if(i%7===0) { // cero y siente % 0
+                            if (i % 7 === 0) { // cero y siente % 0
                                 var row = $("<tr class='week'></tr>");
                                 calendar_days.append(row);
                             }
 
                             // if current index isn't a day in this month, make it blank
-                            if(e < firstDay || day > day_count) {
-                                var curr_date = $("<td class='day nil'>"+"</td>"); // Agrega dia vacío a la tabla
+                            if (e < firstDay || day > day_count) {
+                                let curr_date = $("<td class='day nil'>" + "</td>"); // Agrega dia vacío a la tabla
                                 row.append(curr_date);
-                            }
-                            else {
-                                var curr_date = $("<td class='day'>"+day+"</td>"); // Agrega dia a la tabla
-                                var events = check_events(day, month+1, year); // Verifica si hay eventos en la fecha seleccionada ----------------?
-                                if(today===day && $(".active-date").length===0) { // varifica si la fecha agregada coincide con la decha actual y agrega clase
-                                    curr_date.addClass("active-date");
-                                    show_events(events, months[month], day);//------------------------------------?
+                            } else {
+                                let curr_date = $("<td class='day'>" + day + "</td>"); // Agrega dia a la tabla
+                                let events = check_events(day, month + 1, year); // Verifica si hay eventos en la fecha seleccionada ----------------?
+                                if (today === day && month == thisMonth && year == thisYear) { // varifica si la fecha agregada coincide con la decha actual y agrega clase
+                                    curr_date.addClass("today");
+                                    show_events(events, months[month], day);//Muestra eventos del dia actual
                                 }
                                 // If this date has any events, style it with .event-date
-                                if(events.length!==0) {
+                                if (events.length !== 0) {
                                     curr_date.addClass("event-date");//Verifica si hay eventos en el dia y agrega clase
                                 }
                                 // Set onClick handler for clicking a date
-                                curr_date.click({events: events, month: months[month], day:day}, date_click);//------------------------------------?
+                                curr_date.click({events: events, month: months[month], day: day}, date_click);//------------------------------------?
                                 row.append(curr_date); // Agrega dia a la tabla
                             }
                         }
                         // Append the last row and set the current year
                         //    calendar_days.append(row);//------------------------------------?
-                        $(".year").text(year);
-                        var m = document.getElementById('month');
-
-                        m.innerHTML = months[month]+' '+ year
+                        let m = document.getElementById('date');
+                        m.innerHTML = months[month] + ' ' + year
                     }
 
                     // Get the number of days in a given month/year
                     function days_in_month(month, year) {
-                        var monthStart = new Date(year, month, 1);
-                        var monthEnd = new Date(year, month + 1, 1);
+                        let monthStart = new Date(year, month, 1);
+                        let monthEnd = new Date(year, month + 1, 1);
                         return (monthEnd - monthStart) / (1000 * 60 * 60 * 24);
                     }
 
                     // Event handler for when a date is clicked
                     function date_click(event) {
-                        $(".events-container").show(250);
+                        $(".events").show(250);
                         $(".active-date").removeClass("active-date");
                         $(this).addClass("active-date");
-                        console.log(event.data.day);
                         show_events(event.data.events, event.data.month, event.data.day);
+                        cargaHoras()
                     }
 
                     function next_month(event) {
+                        $(".events").empty();
                         //var date = event.data.date;
-                        var new_month = date.getMonth()+1;
+                        let new_month = date.getMonth() + 1;
                         //   $("year").html(new_year);
                         date.setMonth(new_month);
                         init_calendar();
                     }
 
                     function prev_month(event) {
+                        $(".events").empty();
                         //var date = event.data.date;
-                        var new_month = date.getMonth()-1;
+                        let new_month = date.getMonth() - 1;
                         //   $("year").html(new_year);
                         date.setMonth(new_month);
                         init_calendar();
@@ -402,31 +393,30 @@
                     // Display all events of the selected date in card views
                     function show_events(events, month, day) {
                         // Clear the dates container
-                        $(".events-container").empty();  // Vacía los eventos de la lista de eventos
-                        $(".events-container").show(250);
-                        console.log(event_data["events"]);
+                        $(".events").empty();  // Vacía los eventos de la lista de eventos
+                        $(".events").show(250);
+                        //console.log(event_data["events"]);
                         // If there are no events for this date, notify the user
-                        if(events.length===0) {
-                            var event_card = $("<div class='event-card'></div>");
-                            var event_name = $("<div class='event-name'>There are no events planned for "+month+" "+day+".</div>");
-                            $(event_card).css({ "border-left": "10px solid #FF1744" });
+                        if (events.length === 0) {
+                            let event_card = $("<div class='event-card'></div>");
+                            let event_name = $("<div class='event-name'>No hay eventos en " + month + " " + day + ".</div>");
+                            $(event_card).css({"border-left": "10px solid #FF1744"});
                             $(event_card).append(event_name);
-                            $(".events-container").append(event_card);
-                        }
-                        else {
+                            $(".events").append(event_card);
+                        } else {
                             // Go through and add each event as a card to the events container
-                            for(var i=0; i<events.length; i++) {
-                                var event_card = $("<div class='event-card'></div>");
-                                var event_name = $("<div class='event-name'>"+events[i]["occasion"]+":</div>");
-                                var event_count = $("<div class='event-count'>"+events[i]["invited_count"]+" Invited</div>");
-                                if(events[i]["cancelled"]===true) {
+                            for (let i = 0; i < events.length; i++) {
+                                let event_card = $("<div class='event-card'></div>");
+                                let event_name = $("<div class='event-name'>" + events[i]["occasion"] + ":</div>");
+                                let event_count = $("<div class='event-count'>" + events[i]["invited_count"] + " Invited</div>");
+                                if (events[i]["cancelled"] === true) {
                                     $(event_card).css({
                                         "border-left": "10px solid #FF1744"
                                     });
                                     event_count = $("<div class='event-cancelled'>Cancelled</div>");
                                 }
                                 $(event_card).append(event_name).append(event_count);
-                                $(".events-container").append(event_card);
+                                $(".events").append(event_card);
                             }
                         }
                     }
@@ -434,11 +424,11 @@
                     // Checks if a specific date has any events
                     function check_events(day, month, year) {
                         var events = [];
-                        for(var i=0; i<event_data["events"].length; i++) {
-                            var event = event_data["events"][i];
-                            if(event["day"]===day &&
-                                event["month"]===month &&
-                                event["year"]===year) {
+                        for (let i = 0; i < event_data["events"].length; i++) {
+                            let event = event_data["events"][i];
+                            if (event["day"] === day &&
+                                event["month"] === month &&
+                                event["year"] === year) {
                                 events.push(event);
                             }
                         }
@@ -461,7 +451,7 @@
                                 "invited_count": 120,
                                 "year": 2020,
                                 "month": 1,
-                                "day": 9,
+                                "day": 10,
                                 "cancelled": false
                             }
                         ]
@@ -488,12 +478,11 @@
     }
 
 
-
     var btnCanReserva = document.getElementsByClassName('btn-canReserva');
     for (let btnCanReservar of btnCanReserva) {
         btnCanReservar.onclick = function () {
-            for(let i of calendar){
-                if(i.id === btnCanReservar.id){
+            for (let i of calendar) {
+                if (i.id === btnCanReservar.id) {
                     i.innerHTML = '';
                     break;
                 }
@@ -501,10 +490,31 @@
         };
     }
 
-$('#myModal').on('hidden.bs.modal', function (e) {
-  // do something...
-})
-    var hora = document.getElementsByClassName("horas");
-
+    function cargaHoras() {
+        let am = document.getElementById('am');
+        let pm = document.getElementById('pm');
+        am.innerText = '';
+        pm.innerText = '';
+        console.log(am);
+        fetch('http://127.0.0.1:8000/horas/')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (horas) {
+                for (let h of horas) {
+                    console.log(h.hora);
+                    if(h.idhora < 5){
+                        am.innerHTML += `
+                                     <div class="hora" id="${h.idhora}">${h.hora}</div>
+                                     `
+                    }
+                    else {
+                        pm.innerHTML += `
+                                     <div class="hora" id="${h.idhora}">${h.hora}</div>
+                                         `
+                    }
+                }
+            });
+    }
 </script>
 

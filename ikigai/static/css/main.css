@@ -56,7 +56,7 @@
 
 /*servicios*/
 .icon-service i {
-    color: cornflowerblue;
+    color: rgba(229, 63, 48, 0.81);
     font-size: 30px;
 }
 
@@ -212,7 +212,7 @@
 }
 
 .btn-reserva{
-    background: linear-gradient(90deg, rgba(27,67,187,1) 0%, rgba(42,158,227,1) 100%);
+    background: rgb(238, 62, 49);
     color: white;
     padding: 9px 20px;
     font-weight: 500;

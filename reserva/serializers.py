@@ -5,7 +5,7 @@ from .models import Hora, HorasReservadas
 class HoraSerializers(serializers.ModelSerializer):
     class Meta:
         model = Hora
-        fields = ('idHora', 'hora')
+        fields = ('idhora', 'hora')
 
 
 class ReservaSerializers(serializers.ModelSerializer):
