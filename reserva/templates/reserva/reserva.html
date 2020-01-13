@@ -230,9 +230,10 @@
         btnReservar.onclick = function () {
             for (let i of calendar) {
                 if (i.id === btnReservar.id) {
+                    console.log('chapala')
                     i.innerHTML = `<div class="container">
                                     <div class="row justify-content-center">
-                                    <div class="col-12 col-md-6 mb-4">
+                                    <div class="col-12 col-lg-6 mb-4">
                                     <div class="calendar-container">
                                     <div class="calendar">
                                     <div class="year-header">
@@ -256,7 +257,56 @@
                                     </div>
                                     </div>
                                     </div>
-                                    <div class="col-12 col-md-6">
+                                    <div class="col-12 col-lg-6">
+                                    <div class="events-container">
+                                    <div class="events"></div>
+                                    <div id="horas" class="row">
+                                    <div id="am" class="col-6"></div>
+                                    <div id="pm" class="col-6"></div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    `;
+                }
+            }
+        }
+    }
+
+
+
+    for (let btnReservar of btnReserva) {
+        btnReservar.onclick = function () {
+            for (let i of calendar) {
+                if (i.id === btnReservar.id) {
+                    i.innerHTML = `<div class="container">
+                                    <div class="row justify-content-center">
+                                    <div class="col-12 col-lg-6 mb-4">
+                                    <div class="calendar-container">
+                                    <div class="calendar">
+                                    <div class="year-header">
+                                    <span class="left-button" id="prev"> &lang; </span>
+                                    <span id="date"></span>
+                                    <span class="right-button" id="next"> &rang; </span>
+                                    </div>
+                                    <table class="days-table">
+                                    <thead>
+                                    <td class="day-name">Lu</td>
+                                    <td class="day-name">Ma</td>
+                                    <td class="day-name">Mi</td>
+                                    <td class="day-name">Ju</td>
+                                    <td class="day-name">Vi</td>
+                                    <td class="day-name">Sa</td>
+                                    <td class="day-name">Do</td>
+                                    </thead>
+                                    <tbody class="month-table">
+                                    </tbody>
+                                    </table>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    <div class="col-12 col-lg-6">
                                     <div class="events-container">
                                     <div class="events"></div>
                                     <div id="horas" class="row">
@@ -336,8 +386,8 @@
                                 row.append(curr_date);
                             } else {
                                 let curr_date = $("<td class='day'>" + day + "</td>"); // Agrega dia a la tabla
-                                let events = check_events(day, month + 1, year); // Verifica si hay eventos en la fecha seleccionada ----------------?
-                                if (today === day && month == thisMonth && year == thisYear) { // varifica si la fecha agregada coincide con la decha actual y agrega clase
+                                let events = check_events2(day, month + 1, year); // Verifica si hay eventos en la fecha seleccionada ----------------?
+                                if (today === day && month === thisMonth && year === thisYear) { // varifica si la fecha agregada coincide con la decha actual y agrega clase
                                     curr_date.addClass("today");
                                     show_events(events, months[month], day);//Muestra eventos del dia actual
                                 }
@@ -407,8 +457,8 @@
                             // Go through and add each event as a card to the events container
                             for (let i = 0; i < events.length; i++) {
                                 let event_card = $("<div class='event-card'></div>");
-                                let event_name = $("<div class='event-name'>" + events[i]["occasion"] + ":</div>");
-                                let event_count = $("<div class='event-count'>" + events[i]["invited_count"] + " Invited</div>");
+                                let event_name = $("<div class='event-name'>" + events[i]["dia"] + ":</div>");
+                                let event_count = $("<div class='event-count'>" + events[i]["ano"] + "</div>");
                                 if (events[i]["cancelled"] === true) {
                                     $(event_card).css({
                                         "border-left": "10px solid #FF1744"
@@ -435,6 +485,29 @@
                         return events;
                     }
 
+                    function check_events2(day, month, year) {
+                        var events = [];
+                        fetch('http://127.0.0.1:8000/reservas/')
+                            .then(function (response) {
+                                return response.json();
+                            })
+                            .then(function (horasreservadas) {
+                                console.log(horasreservadas.length);
+                                for (let i = 0; i < horasreservadas.length; i++) {
+                                    let event = horasreservadas[i];
+                                    if (event["dia"] === day &&
+                                        event["mes"] === month &&
+                                        event["ano"] === year) {
+                                        events.push(event);
+                                    }
+                                }
+                            });
+
+                        return events;
+                    }
+
+
+
                     // Given data for events in JSON format
                     var event_data = {
                         "events": [
@@ -456,6 +529,8 @@
                             }
                         ]
                     };
+
+
 
                     const months = [
                         "Enero",
@@ -495,14 +570,12 @@
         let pm = document.getElementById('pm');
         am.innerText = '';
         pm.innerText = '';
-        console.log(am);
         fetch('http://127.0.0.1:8000/horas/')
             .then(function (response) {
                 return response.json();
             })
             .then(function (horas) {
                 for (let h of horas) {
-                    console.log(h.hora);
                     if(h.idhora < 5){
                         am.innerHTML += `
                                      <div class="hora" id="${h.idhora}">${h.hora}</div>
@@ -516,5 +589,8 @@
                 }
             });
     }
+
+
+
 </script>
 
