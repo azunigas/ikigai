@@ -233,9 +233,9 @@
                     console.log('chapala')
                     i.innerHTML = `<div class="container">
                                     <div class="row justify-content-center">
-                                    <div class="col-12 col-lg-6 mb-4">
+                                    <div class="col-12 col-lg-6">
                                     <div class="calendar-container">
-                                    <div class="calendar">
+
                                     <div class="year-header">
                                     <span class="left-button" id="prev"> &lang; </span>
                                     <span id="date"></span>
@@ -254,7 +254,7 @@
                                     <tbody class="month-table">
                                     </tbody>
                                     </table>
-                                    </div>
+
                                     </div>
                                     </div>
                                     <div class="col-12 col-lg-6">
@@ -282,9 +282,9 @@
                 if (i.id === btnReservar.id) {
                     i.innerHTML = `<div class="container">
                                     <div class="row justify-content-center">
-                                    <div class="col-12 col-lg-6 mb-4">
+                                    <div class="col-12 col-lg-6">
                                     <div class="calendar-container">
-                                    <div class="calendar">
+
                                     <div class="year-header">
                                     <span class="left-button" id="prev"> &lang; </span>
                                     <span id="date"></span>
@@ -303,15 +303,41 @@
                                     <tbody class="month-table">
                                     </tbody>
                                     </table>
-                                    </div>
+
                                     </div>
                                     </div>
                                     <div class="col-12 col-lg-6">
                                     <div class="events-container">
                                     <div class="events"></div>
                                     <div id="horas" class="row">
-                                    <div id="am" class="col-6"></div>
-                                    <div id="pm" class="col-6"></div>
+                                    <div id="am" class="col-6">
+                                     <div class="hora" id="1">08:00 - 09:00</div>
+
+                                     <div class="hora" id="2">09:00 - 10:00</div>
+
+                                     <div class="hora" id="3">10:00 - 11:00</div>
+
+                                     <div class="hora" id="4">11:00 - 12:00</div>
+                                     </div>
+                                    <div id="pm" class="col-6">
+                                     <div class="hora" id="5">12:00 - 13:00</div>
+
+                                     <div class="hora" id="6">13:00 - 14:00</div>
+
+                                     <div class="hora" id="7">14:00 - 15:00</div>
+
+                                     <div class="hora" id="8">15:00 - 16:00</div>
+
+                                     <div class="hora" id="9">16:00 - 17:00</div>
+
+                                     <div class="hora" id="10">17:00 - 18:00</div>
+
+                                     <div class="hora" id="11">18:00 - 19:00</div>
+
+                                     <div class="hora" id="12">19:00 - 20:00</div>
+
+                                     <div class="hora" id="13">20:00 - 21:00</div>
+                                         </div>
                                     </div>
                                     </div>
                                     </div>
@@ -419,7 +445,7 @@
                         $(".active-date").removeClass("active-date");
                         $(this).addClass("active-date");
                         show_events(event.data.events, event.data.month, event.data.day);
-                        cargaHoras()
+                       //cargaHoras()
                     }
 
                     function next_month(event) {
@@ -456,6 +482,13 @@
                         } else {
                             // Go through and add each event as a card to the events container
                             for (let i = 0; i < events.length; i++) {
+                                var hora = document.getElementsByClassName('hora');
+                                for(let x of hora){
+                                    if(x.id == events[i]['idhora_id']){
+                                        console.log('ok');
+                                        x.className += ' reservado'
+                                    }
+                                }
                                 let event_card = $("<div class='event-card'></div>");
                                 let event_name = $("<div class='event-name'>" + events[i]["dia"] + ":</div>");
                                 let event_count = $("<div class='event-count'>" + events[i]["ano"] + "</div>");
@@ -565,7 +598,7 @@
         };
     }
 
-    function cargaHoras() {
+    /*function cargaHoras() {
         let am = document.getElementById('am');
         let pm = document.getElementById('pm');
         am.innerText = '';
@@ -589,6 +622,8 @@
                 }
             });
     }
+
+     */
 
 
 
