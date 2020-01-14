@@ -71,7 +71,7 @@
     <div class="row justify-content-center">
         {% if boxes %}
             {% for box in boxes %}
-                <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="col-sm-6 col-md-4 col-lg-3 {{ box.nombrebox }}">
                     <div class="box_grid shadow">
                         <figure class="block-reveal">
                             <img src="{{ box.imagen.url }}" class="img-fluid" alt="">
@@ -223,13 +223,26 @@
 </script>
 
 <script>
-    var btnReserva = document.getElementsByClassName('btn-reserva');
-    var calendar = document.getElementsByClassName("calendar");
+    var arrayHoras = [];
+    fetch('http://127.0.0.1:8000/reservas/')
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (horasreservadas) {
+            arrayHoras = horasreservadas;
+        });
+</script>
 
-    for (let btnReservar of btnReserva) {
-        btnReservar.onclick = function () {
-            for (let i of calendar) {
-                if (i.id === btnReservar.id) {
+
+<script>
+    var btnReserva = document.getElementsByClassName('btn-reserva');
+    var clndr = document.getElementsByClassName("calendar");
+
+
+    for (let btnR of btnReserva) {
+        btnR.onclick = function () {
+            for (let i of clndr) {
+                if (i.id === btnR.id) {
                     i.innerHTML = `<div class="container">
                                     <div class="row justify-content-center">
                                     <div class="col-12 col-lg-6">
@@ -258,7 +271,6 @@
                                     </div>
                                     <div class="col-12 col-lg-6">
                                     <div class="events-container">
-                                    <div class="events"></div>
                                     <div id="horas" class="row">
                                     <div id="am" class="col-6">
                                      <div class="hora" id="1">08:00 - 09:00</div>
@@ -294,7 +306,6 @@
                                     </div>
                                     </div>
                                     `;
-
                     // Setup the calendar with the current date
                     let date = new Date();
                     $(document).ready(function () {
@@ -306,12 +317,14 @@
                         let events = check_events(today, date.getMonth() + 1, date.getFullYear());
                     });
 
+
                     // Initialize the calendar by appending the HTML dates
                     let today = date.getDate(); // obtine numero del dia del mes
                     let thisMonth = date.getMonth();
                     let thisYear = date.getFullYear();
 
                     function init_calendar() {
+
                         $(".reservado").removeClass("reservado");
                         let calendar_days = $(".month-table");// Asocia la tabla de fechas a la variable calendar_days
                         calendar_days.empty(); // Vacía los dias del calendario
@@ -366,14 +379,14 @@
                                 let events = check_events(day, month + 1, year); // Verifica si hay eventos en la fecha seleccionada ----------------?
                                 if (today === day && month === thisMonth && year === thisYear) { // varifica si la fecha agregada coincide con la decha actual y agrega clase
                                     curr_date.addClass("today");
-                                    show_events(events, months[month], day);//Muestra eventos del dia actual
+                                    show_events(events);//Muestra eventos del dia actual
                                 }
                                 // If this date has any events, style it with .event-date
                                 if (events.length !== 0) {
                                     curr_date.addClass("event-date");//Verifica si hay eventos en el dia y agrega clase
                                 }
                                 // Set onClick handler for clicking a date
-                                curr_date.click({events: events, month: months[month], day: day}, date_click);//------------------------------------?
+                                curr_date.click({events: events}, date_click);//------------------------------------?
                                 row.append(curr_date); // Agrega dia a la tabla
                             }
                         }
@@ -392,21 +405,18 @@
 
                     // Event handler for when a date is clicked
                     function date_click(event) {
-                        $(".events").show(250);
                         $(".active-date").removeClass("active-date");
                         $(this).addClass("active-date");
-                        show_events(event.data.events, event.data.month, event.data.day);
+                        show_events(event.data.events);
                     }
 
                     function next_month() {
-                        $(".events").empty();
                         let new_month = date.getMonth() + 1;
                         date.setMonth(new_month);
                         init_calendar();
                     }
 
                     function prev_month() {
-                        $(".events").empty();
                         let new_month = date.getMonth() - 1;
                         date.setMonth(new_month);
                         init_calendar();
@@ -414,10 +424,6 @@
 
                     // Display all events of the selected date in card views
                     function show_events(events) {
-                        // Clear the dates container
-                        $(".events").empty();  // Vacía los eventos de la lista de eventos
-                        $(".events").show(250);
-
                         // If there are no events for this date, notify the user
                         if (events.length === 0) {
                             $(".reservado").removeClass("reservado");
@@ -425,60 +431,26 @@
                         } else {
                             $(".reservado").removeClass("reservado");
                             // Go through and add each event as a card to the events container
-                            for(let i = 0; i < events.length; i++) {
-                                console.log(events)
+                            for (let i = 0; i < events.length; i++) {
+                                console.log(events);
                                 document.getElementById(events[i]['idhora_id']).classList.add('reservado');
                             }
                         }
                     }
 
                     function check_events(day, month, year) {
-
                         var events = [];
-                        fetch('http://127.0.0.1:8000/reservas/')
-                            .then(function (response) {
-                                return response.json();
-                            })
-                            .then(function (horasreservadas) {
-                                for (let i = 0; i < horasreservadas.length; i++) {
-                                    let event = horasreservadas[i];
-                                    if (event["dia"] === day &&
-                                        event["mes"] === month &&
-                                        event["ano"] === year &&
-                                        event['idbox'] == btnReservar.id) {
-                                        events.push(event);
-                                    }
-                                }
-                            });
+                        for (let i = 0; i < arrayHoras.length; i++) {
+                            let event = arrayHoras[i];
+                            if (event["dia"] === day &&
+                                event["mes"] === month &&
+                                event["ano"] === year &&
+                                event["idbox"] == btnR.id) {
+                                events.push(event);
+                            }
+                        }
                         return events;
                     }
-
-
-
-                    // Given data for events in JSON format
-                    var event_data = {
-                        "events": [
-                            {
-                                "occasion": " Repeated Test Event ",
-                                "invited_count": 120,
-                                "year": 2020,
-                                "month": 1,
-                                "day": 9,
-                                "cancelled": true,
-                            },
-                            {
-                                "occasion": " Repeated Test Event ",
-                                "invited_count": 120,
-                                "year": 2020,
-                                "month": 1,
-                                "day": 10,
-                                "cancelled": false
-                            }
-                        ]
-                    };
-
-
-
                     const months = [
                         "Enero",
                         "Febrero",
@@ -499,12 +471,11 @@
         };
     }
 
-
-    var btnCanReserva = document.getElementsByClassName('btn-canReserva');
-    for (let btnCanReservar of btnCanReserva) {
-        btnCanReservar.onclick = function () {
-            for (let i of calendar) {
-                if (i.id === btnCanReservar.id) {
+    var btnCnRsrv = document.getElementsByClassName('btn-canReserva');
+    for (let bcr of btnCnRsrv) {
+        bcr.onclick = function () {
+            for (let i of clndr) {
+                if (i.id === bcr.id) {
                     i.innerHTML = '';
                     break;
                 }
@@ -538,7 +509,6 @@
     }
 
      */
-
 
 
 </script>
