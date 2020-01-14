@@ -149,7 +149,7 @@
     padding: 3px;
 }
 
-.hora:hover{
+.hora:not(.reservado):hover{
     background: rgb(199, 235, 69);
     color: #f7f7f7;
 }
@@ -165,5 +165,6 @@
 }
 
 .reservado{
-    color: lime;
+    background-color: #545b62;
+    cursor: not-allowed;
 }
