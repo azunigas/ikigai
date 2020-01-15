@@ -306,19 +306,23 @@
                                     </div>
                                     </div>
                                     `;
-                    // Setup the calendar with the current date
+
                     let date = new Date();
+                    let hr = document.getElementsByClassName('hora');
+                    for(let i of hr){
+                        i.onclick = function () {
+                            hr_select(i.id, btnR.id)
+                        }
+                    }
+
                     $(document).ready(function () {
                         let today = date.getDate();
                         // Set click handlers for DOM elements
-                        $('.left-button').click({date: date}, prev_month);
-                        $('.right-button').click({date: date}, next_month);
+                        $('.left-button').click({dt: date}, prev_month);
+                        $('.right-button').click({dt: date}, next_month);
                         init_calendar(date);
-                        let events = check_events(today, date.getMonth() + 1, date.getFullYear());
                     });
 
-
-                    // Initialize the calendar by appending the HTML dates
                     let today = date.getDate(); // obtine numero del dia del mes
                     let thisMonth = date.getMonth();
                     let thisYear = date.getFullYear();
@@ -358,11 +362,7 @@
                                 firstDay = 6;
                                 break;
                         }
-                        // 35+firstDay is the number of date elements to be added to the dates table
-                        // 35 is from (7 days in a week) * (up to 5 rows of dates in a month)
                         for (i = 0, e = 1; i < day_count + firstDay - 1; i++, e++) {
-                            // Since some of the elements will be blank,
-                            // need to calculate actual date from index
                             let day = e - firstDay + 1;
                             // If it is a sunday, make a new row
                             if (i % 7 === 0) { // cero y siente % 0
@@ -370,7 +370,6 @@
                                 calendar_days.append(row);
                             }
 
-                            // if current index isn't a day in this month, make it blank
                             if (e < firstDay || day > day_count) {
                                 let curr_date = $("<td class='day nil'>" + "</td>"); // Agrega dia vacío a la tabla
                                 row.append(curr_date);
@@ -381,7 +380,6 @@
                                     curr_date.addClass("today");
                                     show_events(events);//Muestra eventos del dia actual
                                 }
-                                // If this date has any events, style it with .event-date
                                 if (events.length !== 0) {
                                     curr_date.addClass("event-date");//Verifica si hay eventos en el dia y agrega clase
                                 }
@@ -390,8 +388,6 @@
                                 row.append(curr_date); // Agrega dia a la tabla
                             }
                         }
-                        // Append the last row and set the current year
-                        //    calendar_days.append(row);//------------------------------------?
                         let m = document.getElementById('date');
                         m.innerHTML = months[month] + ' ' + year
                     }
@@ -424,7 +420,6 @@
 
                     // Display all events of the selected date in card views
                     function show_events(events) {
-                        // If there are no events for this date, notify the user
                         if (events.length === 0) {
                             $(".reservado").removeClass("reservado");
 
@@ -465,6 +460,10 @@
                         "Noviembre",
                         "Diciembre"
                     ];
+
+                    function hr_select(idhora, idbox) {
+                        console.log(idhora+' '+idbox);
+                    }
                     break;
                 }
             }
@@ -513,3 +512,6 @@
 
 </script>
 
+<script>
+
+</script>
