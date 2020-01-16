@@ -86,7 +86,7 @@
                         <ul>
                             <li>
                                 <div class="btn-reserva" id="{{ box.id }}" data-toggle="modal"
-                                     data-target="#{{ box.nombrebox }}">Reservar Ahora
+                                     data-target="#{{ box.nombrebox }}">Reservar
                                 </div>
                             </li>
                         </ul>
@@ -110,12 +110,12 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary btn-canReserva" data-dismiss="modal"
-                                        id="{{ box.id }}">Cancelar
-                                </button>
-                                <button type="button" class="btn btn-primary btn-conReserva" id="{{ box.id }}">
-                                    Reservar
-                                </button>
+                                <div class="btn-cancelar btn-canReserva" data-dismiss="modal" id="{{ box.id }}">
+                                    Cancelar
+                                </div>
+                                <div class="btn-confirmar btn-conReserva" id="{{ box.id }}">
+                                    Confirmar
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -308,12 +308,7 @@
                                     `;
 
                     let date = new Date();
-                    let hr = document.getElementsByClassName('hora');
-                    for(let i of hr){
-                        i.onclick = function () {
-                            hr_select(i.id, btnR.id)
-                        }
-                    }
+
 
                     $(document).ready(function () {
                         let today = date.getDate();
@@ -384,7 +379,7 @@
                                     curr_date.addClass("event-date");//Verifica si hay eventos en el dia y agrega clase
                                 }
                                 // Set onClick handler for clicking a date
-                                curr_date.click({events: events}, date_click);//------------------------------------?
+                                curr_date.click({events: events,day:day, month:month, year:year}, date_click);//------------------------------------?
                                 row.append(curr_date); // Agrega dia a la tabla
                             }
                         }
@@ -399,12 +394,29 @@
                         return (monthEnd - monthStart) / (1000 * 60 * 60 * 24);
                     }
 
+
+                    let resr = [];
                     // Event handler for when a date is clicked
                     function date_click(event) {
                         $(".active-date").removeClass("active-date");
                         $(this).addClass("active-date");
                         show_events(event.data.events);
+                        let hr = document.getElementsByClassName('hora');
+                        for(let i of hr){
+                            i.onclick = function () {
+                                var activDay = document.getElementsByClassName('active-date');
+                                if(activDay.length == 0){
+                                    console.log('seleccionar dia')
+                                };
+                                resr = [];
+                                resr.push(event.data.day, event.data.month+1, event.data.year, parseInt(i.id), parseInt(btnR.id));
+                                console.log(resr)
+                            }
+                        }
                     }
+
+
+
 
                     function next_month() {
                         let new_month = date.getMonth() + 1;
@@ -461,10 +473,7 @@
                         "Diciembre"
                     ];
 
-                    function hr_select(idhora, idbox) {
-                        console.log(idhora+' '+idbox);
-                    }
-                    break;
+
                 }
             }
         };

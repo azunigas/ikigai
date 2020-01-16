@@ -213,6 +213,16 @@
 
 .btn-reserva{
     background: rgb(238, 62, 49);
+}
+
+.btn-cancelar{
+    background: rgb(176, 174, 175);
+}
+.btn-confirmar{
+    background: rgb(65, 167, 238);
+}
+
+.btn-confirmar, .btn-reserva, .btn-cancelar{
     color: white;
     padding: 9px 20px;
     font-weight: 500;
@@ -226,7 +236,7 @@
     cursor: pointer;
 }
 
-.btn-reserva:hover{
+.btn-reserva:hover, .btn-confirmar:hover, .btn-cancelar:hover{
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
