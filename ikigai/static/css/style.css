@@ -127,7 +127,12 @@
     background: rgb(78, 150, 235);
     color: #f7f7f7;
     transition: background-color 0.3s cubic-bezier(0.25, 0.1, 0.49, 0.9);
+}
 
+.reservar_hora{
+    background-color: #2ea388 !important;
+    color: #f7f7f7;
+    transition: background-color 0.3s cubic-bezier(0.25, 0.1, 0.49, 0.9);
 }
 
 #am{

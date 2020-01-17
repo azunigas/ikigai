@@ -113,7 +113,7 @@
                                 <div class="btn-cancelar btn-canReserva" data-dismiss="modal" id="{{ box.id }}">
                                     Cancelar
                                 </div>
-                                <div class="btn-confirmar btn-conReserva" id="{{ box.id }}">
+                                <div class="btn-disabled btn-confirmar btn-conReserva" id="{{ box.id }}">
                                     Confirmar
                                 </div>
                             </div>
@@ -404,27 +404,35 @@
                         let hr = document.getElementsByClassName('hora');
                         for(let i of hr){
                             i.onclick = function () {
-                                var activDay = document.getElementsByClassName('active-date');
-                                if(activDay.length == 0){
-                                    console.log('seleccionar dia')
-                                };
-                                resr = [];
-                                resr.push(event.data.day, event.data.month+1, event.data.year, parseInt(i.id), parseInt(btnR.id));
-                                console.log(resr)
+                                let a = document.getElementsByClassName('active-date')
+                                console.log(a)
+                                if(a.length === 0){
+                                    alert('Debe seleccionar el día')
+                                }else {
+                                    $(".reservar_hora").removeClass("reservar_hora");
+                                    $(".btn-disabled").removeClass("btn-disabled");
+
+                                    i.classList.add('reservar_hora');
+                                    resr = [];
+                                    resr.push(event.data.day, event.data.month+1, event.data.year, parseInt(i.id), parseInt(btnR.id));
+                                    console.log(resr)
+                                }
                             }
                         }
                     }
 
 
-
-
                     function next_month() {
+                        $(".reservar_hora").removeClass("reservar_hora");
+                        $(".btn-confirmar").addClass('btn-disabled');
                         let new_month = date.getMonth() + 1;
                         date.setMonth(new_month);
                         init_calendar();
                     }
 
                     function prev_month() {
+                        $(".reservar_hora").removeClass("reservar_hora");
+                        $(".btn-confirmar").addClass('btn-disabled');
                         let new_month = date.getMonth() - 1;
                         date.setMonth(new_month);
                         init_calendar();
