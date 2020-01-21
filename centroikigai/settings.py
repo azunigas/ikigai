@@ -133,5 +133,5 @@ MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = 'reserva'
+LOGIN_REDIRECT_URL = 'reserva:reserva'
 LOGIN_URL = 'login'

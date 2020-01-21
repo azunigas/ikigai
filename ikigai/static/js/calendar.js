@@ -177,7 +177,7 @@ for (let btnR of btnReserva) {
                     let hr = document.getElementsByClassName('hora');
                     for(let i of hr){
                         i.onclick = function () {
-                            let a = document.getElementsByClassName('active-date')
+                            let a = document.getElementsByClassName('active-date');
                             console.log(a)
                             if(a.length === 0){
                                 alert('Debe seleccionar el día')
@@ -186,13 +186,15 @@ for (let btnR of btnReserva) {
                                 $(".btn-disabled").removeClass("btn-disabled");
 
                                 i.classList.add('reservar_hora');
-                                resr = [];
-                                resr.push(event.data.day, event.data.month+1, event.data.year, parseInt(i.id), parseInt(btnR.id));
-                                console.log(resr)
+                                resr = [event.data.day, event.data.month+1, event.data.year, parseInt(i.id), parseInt(btnR.id)];
+                                console.log(resr);
+                                var rs = {dia:event.data.day, mes:event.data.month+1, ano:event.data.year, horas:{idhora:parseInt(i.id), idbox:parseInt(btnR.id)}};
+                                console.log(rs);
                             }
                         }
                     }
                 }
+
 
 
                 function next_month() {

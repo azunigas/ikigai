@@ -61,8 +61,6 @@
 
 {% block content %}
 
-{% endblock %}
-
 <!--Box-->
 <div class="section shadow-lg" id="box">
     <h2 class="title text-center">Reservas</h2>
@@ -128,8 +126,10 @@
 </div>
 <!--/Box-->
 
+{% endblock %}
 
 </body>
+
 <!--Footer-->
 <footer class="footer text-center">
     <div class="pt-3">
@@ -153,8 +153,7 @@
             </a>
         </li>
     </ul>
-    <div class="footer-copyright p-3">Todos los derechos reservados | Centro Ikigai 2018
-    </div>
+    <div class="footer-copyright p-3">Todos los derechos reservados | Centro Ikigai 2018</div>
 </footer>
 <!--/Footer-->
 
@@ -184,12 +183,5 @@
 <script src="{% static 'js/calendar.js' %}"></script>
 <script src="{% static 'js/jquery.min.js' %}"></script>
 
-<!--Oculta mensajes de alerta-->
-<script>
-    $(document).ready(function () {
-        $(".alert-success").fadeTo(7000, 0).slideUp(500, function () {
-            $(".alert-success").slideUp(500);
-        });
-    });
-</script>
+
 
